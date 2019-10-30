@@ -1,0 +1,3 @@
+- To run th container : docker-compose exec php-fpm bash
+
+- To acces database : mysql -h localhost -P 3307 --protocol=tcp -u user -p
