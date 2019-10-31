@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b3bbe25-204c-4829-b715-d094d8e033f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jobeet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jobeet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tips.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/jobs/extreme-sensio.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/jobs/sensio-labs.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/CategoryFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/JobFixtures.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Affiliate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Job.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20191031144003.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/AffiliateRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CategoryRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/JobRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -225,7 +231,7 @@
       <option name="presentableId" value="Default" />
       <updated>1572449586973</updated>
       <workItem from="1572449588191" duration="2650000" />
-      <workItem from="1572529027593" duration="5876000" />
+      <workItem from="1572529027593" duration="6066000" />
     </task>
     <servers />
   </component>
