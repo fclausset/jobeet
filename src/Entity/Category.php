@@ -114,4 +114,15 @@ class Category
 
         return $this;
     }
+
+
+    /**
+     * @return Job[]|ArrayCollection
+     */
+    public function getActiveJobs()
+    {
+        return $this->jobs->filter(function(Job $job) {
+            return $job->getExpiresAt() > new \DateTime();
+        });
+    }
 }
