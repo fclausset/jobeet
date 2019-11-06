@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use App\Form\JobType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Service\FileUploader;
 
 
 class JobController extends AbstractController
@@ -28,6 +29,8 @@ class JobController extends AbstractController
     public function list(CategoryRepository $categoryRepository) : Response
     {
        $categories = $categoryRepository->findWithActiveJobs();
+
+       dump($this->getParameter("kernel.project_dir"));
 
         return $this->render('job/list.html.twig', [
             'categories' => $categories,
@@ -63,7 +66,7 @@ class JobController extends AbstractController
      *
      * @return RedirectResponse|Response
      */
-    public function create(Request $request, EntityManagerInterface $em) : Response
+    public function create(Request $request, EntityManagerInterface $em, FileUploader $fileUploader) : Response
     {
         $job = new Job();
         $form = $this->createForm(JobType::class, $job);
@@ -74,13 +77,7 @@ class JobController extends AbstractController
             $logoFile = $form->get('logo')->getData();
 
             if ($logoFile instanceof UploadedFile) {
-                $fileName = \bin2hex(\random_bytes(10)) . '.' . $logoFile->guessExtension();
-
-                // moves the file to the directory where brochures are stored
-                $logoFile->move(
-                    $this->getParameter('jobs_directory'),
-                    $fileName
-                );
+                $fileName = $fileUploader->upload($logoFile);
 
                 $job->setLogo($fileName);
             }
@@ -94,4 +91,33 @@ class JobController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * Edit existing job entity
+     *
+     * @Route("/job/{token}/edit", name="job.edit", methods={"GET", "POST"}, requirements={"token" = "\w+"})
+     *
+     * @param Request $request
+     * @param Job $job
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function edit(Request $request, Job $job, EntityManagerInterface $em) : Response
+    {
+        $form = $this->createForm(JobType::class, $job);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('job.list');
+        }
+
+        return $this->render('job/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
