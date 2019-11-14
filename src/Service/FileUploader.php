@@ -14,7 +14,6 @@ class FileUploader
     public function __construct(string $targetDirectory)
     {
         $this->targetDirectory = $targetDirectory;
-        var_dump($targetDirectory);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CategoryRepository;
 use App\Repository\JobRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Job;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,7 +85,10 @@ class JobController extends AbstractController
             $em->persist($job);
             $em->flush();
 
-            return $this->redirectToRoute('job.list');
+            return $this->redirectToRoute(
+                'job.preview',
+                ['token' => $job->getToken()]
+            );
         }
 
         return $this->render('job/create.html.twig', [
@@ -112,12 +116,76 @@ class JobController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('job.list');
+            return $this->redirectToRoute(
+                'job.preview',
+                ['token' => $job->getToken()]
+            );
         }
 
         return $this->render('job/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * Finds and displays the preview page for a job entity.
+     *
+     * @Route("job/{token}", name="job.preview", methods="GET", requirements={"token" = "\w+"})
+     *
+     * @param Job $job
+     *
+     * @return Response
+     */
+    public function preview(Job $job) : Response
+    {
+        $deleteForm = $this->createDeleteForm($job);
+        return $this->render('job/show.html.twig', [
+            'job' => $job,
+            'hasControlAccess' => true,
+            'deleteForm' => $deleteForm->createView()
+        ]);
+    }
+
+    /**
+     * Delete a job entity.
+     *
+     * @Route("job/{token}/delete", name="job.delete", methods="DELETE", requirements={"token" = "\w+"})
+     *
+     * @param Request $request
+     * @param Job $job
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function delete(Request $request, Job $job, EntityManagerInterface $em) : Response
+    {
+        $form = $this->createDeleteForm($job);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->remove($job);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('job.list');
+    }
+
+
+    /**
+     * Creates a form to delete a job entity.
+     *
+     * @param Job $job
+     *
+     * @return FormInterface
+     */
+    private function createDeleteForm(Job $job) : FormInterface
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('job.delete', ['token' => $job->getToken()]))
+            ->setMethod('DELETE')
+            ->getForm();
+    }
+
 
 }

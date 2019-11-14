@@ -28,7 +28,7 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
         $jobSensioLabs->setHowToApply('Send your resume to fabien.potencier [at] sensio.com');
         $jobSensioLabs->setPublic(true);
         $jobSensioLabs->setActivated(true);
-        $jobSensioLabs->setToken('job_sensio_labs');
+        //$jobSensioLabs->setToken('job_sensio_labs');
         $jobSensioLabs->setEmail('job@example.com');
         $jobSensioLabs->setExpiresAt(new \DateTime('+30 days'));
 
@@ -44,7 +44,7 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
         $jobExtremeSensio->setHowToApply('Send your resume to fabien.potencier [at] sensio.com');
         $jobExtremeSensio->setPublic(true);
         $jobExtremeSensio->setActivated(true);
-        $jobExtremeSensio->setToken('job_extreme_sensio');
+        //$jobExtremeSensio->setToken('job_extreme_sensio');
         $jobExtremeSensio->setEmail('job@example.com');
         $jobExtremeSensio->setExpiresAt(new \DateTime('+30 days'));
 
@@ -60,7 +60,7 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
         $jobExpired->setHowToApply('Send your resume to lorem.ipsum [at] dolor.sit');
         $jobExpired->setPublic(true);
         $jobExpired->setActivated(true);
-        $jobExpired->setToken('job_expired');
+        //$jobExpired->setToken('job_expired');
         $jobExpired->setEmail('job@example.com');
         $jobExpired->setExpiresAt(new \DateTime('-10 days'));
 
@@ -80,7 +80,7 @@ class JobFixtures extends Fixture implements DependentFixtureInterface
             $job->setHowToApply('Send your resume to lorem.ipsum [at] dolor.sit');
             $job->setPublic(true);
             $job->setActivated(true);
-            $job->setToken('job_' . $i);
+            //$job->setToken('job_' . $i);
             $job->setEmail('job@example.com');
 
             $manager->persist($job);
